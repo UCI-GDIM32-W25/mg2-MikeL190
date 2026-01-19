@@ -7,23 +7,29 @@ public class Game_Controller : MonoBehaviour
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private GameObject coinSpawner;
 
+    public float minDelay = 1.0f;
+    public float maxDelay = 5.0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnCoin();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        StartCoroutine(SpawnLoop());
     }
 
     public void SpawnCoin()
     {
         Instantiate(coinPrefab, coinSpawner.transform.position, Quaternion.identity);
-        Debug.Log("Spawning Coins");
+    }
+
+    private IEnumerator SpawnLoop()
+    {
+        while(true)
+        {
+            int randomWaitTime = Random.Range(1, 3);
+            yield return new WaitForSeconds(randomWaitTime);
+            SpawnCoin();
+        }
     }
 
 }

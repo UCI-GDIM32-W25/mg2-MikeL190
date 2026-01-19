@@ -9,7 +9,7 @@ public class Coin_Logic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(Countdown_Timer());
     }
 
     // Update is called once per frame
@@ -17,4 +17,11 @@ public class Coin_Logic : MonoBehaviour
     {
         transform.position += new Vector3(-1, 0, 0) * coinMovementSpeed * Time.deltaTime;
     }
+
+    private IEnumerator Countdown_Timer()
+    {
+        yield return new WaitForSeconds(8);
+        Destroy(gameObject);
+    }
+
 }
